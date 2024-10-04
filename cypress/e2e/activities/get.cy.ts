@@ -1,7 +1,7 @@
 import { entity, endpoint } from "./";
 describe(`Testing GET: ${endpoint}`, () => {
   const numberOfActivities = 30;
-  
+
   it(`GET ${endpoint}: should be able to retrieve all ${numberOfActivities} activities`, () => {
     cy.request(endpoint).then((response) => {
       expect(response.status).to.equal(200);
@@ -18,6 +18,16 @@ describe(`Testing GET: ${endpoint}`, () => {
         expect(response.body.id).to.equal(testId);
         expect(response.body.title).to.equal(`Activity ${testId}`);
       });
+    });
+  });
+
+  it(`GET ${endpoint}/{id}: should return 404 when id is not found`, () => {
+    const testId = 999999;
+    cy.request({
+      url: endpoint + "/" + testId,
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.equal(404);
     });
   });
 });
