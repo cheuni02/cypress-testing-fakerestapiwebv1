@@ -20,6 +20,6 @@ describe(`demonstrate the capabilities of cypress stubbing on ${pageUnderTest} p
 
     cy.visit("https://reqres.in/").get(`[data-id="users-single"]`).click();
 
-  }):
+  });
 
 });
